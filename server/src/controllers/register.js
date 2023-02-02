@@ -11,10 +11,10 @@ exports.registerUser = async (req, res) => {
 
         const token = JWT.sign({ id: user._id }, process.env.TOKEN_SECRET_KEY, {
             expiresIn: "24h",
-        })
+        });
 
         return res.status(200).json({ user, token });
     } catch (err) {
         return res.status(500).json(err);
     }
-}
+};
