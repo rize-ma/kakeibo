@@ -4,6 +4,7 @@ require("dotenv").config();
 
 const User = require("../models/user");
 const { registerUser } = require("../controllers/register");
+const { login } = require("../controllers/login");
 
 router.post(
     "/register",
@@ -23,6 +24,13 @@ router.post(
     registerUser
 );
 
+router.post(
+    "/login",
+    body("password")
+        .isLength({ min: 8 })
+        .withMessage("パスワードは8文字以上である必要があります"),
+    login
+);
 
 
 module.exports = router;
