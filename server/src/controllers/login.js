@@ -16,7 +16,7 @@ exports.login = async (req, res) => {
                         msg: "ユーザー名が存在しません"
                     }
                 ]
-            })
+            });
         }
 
         const descryptedPassword = CryptoJS.AES.decrypt(
@@ -31,15 +31,15 @@ exports.login = async (req, res) => {
                         msg: "パスワードが無効です"
                     }
                 ]
-            })
+            });
         }
 
         const token = JWT.sign({ id: user._id }, process.env.TOKEN_SECRET_KEY, {
             expiresIn: "24h",
         });
 
-        return res.status(201).json({ user, token })
+        return res.status(201).json({ user, token });
     } catch (error) {
-        return res.status(500).json(error)
+        return res.status(500).json(error);
     }
 }

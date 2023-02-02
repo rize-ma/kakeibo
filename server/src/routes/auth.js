@@ -5,6 +5,7 @@ require("dotenv").config();
 const User = require("../models/user");
 const { registerUser } = require("../controllers/register");
 const { login } = require("../controllers/login");
+const tokenHandler = require("../handlers/tokenHandlers");
 
 router.post(
     "/register",
@@ -32,5 +33,8 @@ router.post(
     login
 );
 
+router.post("/verify-token", tokenHandler.verifyToken, (req, res) => {
+    return res.status(200).json({ user: req.user })
+});
 
 module.exports = router;
