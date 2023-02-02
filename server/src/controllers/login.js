@@ -18,7 +18,7 @@ exports.login = async (req, res) => {
                 ]
             })
         }
-        //パスワードが合っているかどうか
+
         const descryptedPassword = CryptoJS.AES.decrypt(
             user.password,
             process.env.SECRET_KEY
@@ -34,7 +34,6 @@ exports.login = async (req, res) => {
             })
         }
 
-        //JWTを発行
         const token = JWT.sign({ id: user._id }, process.env.TOKEN_SECRET_KEY, {
             expiresIn: "24h",
         });
