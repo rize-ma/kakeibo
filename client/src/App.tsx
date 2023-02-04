@@ -1,11 +1,14 @@
-import './App.css'
-import { Button } from "@material-tailwind/react";
+import { FC } from "react";
+import { AuthLayout } from "./components/Layout/AuthLayout";
+import { UserRegister } from "./components/pages/UserRegister";
 
-function App() {
+const App : FC = () => {
   
   return (
     <div>
-      <Button>Button</Button>
+      <AuthLayout>
+        <UserRegister/>
+      </AuthLayout>
     </div>
   )
 }
