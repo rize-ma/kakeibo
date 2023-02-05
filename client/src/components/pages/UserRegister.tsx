@@ -9,6 +9,7 @@ import {
     Alert,
     } from "@material-tailwind/react";
 import { changeFormInput, userRegister } from "../../types";
+import { confirmPasswordValidation, emailValidation, passwordValidation, userNameValidation } from "../../utils/validation";
 
 export const UserRegister : FC = () => {
     const [userName, setUserName] = useState<string>("");
@@ -21,12 +22,7 @@ export const UserRegister : FC = () => {
     const [confirmPasswordErrText, setConfirmPasswordErrText] = useState<string>("");
 
     const changeUserName : changeFormInput = (e) => {
-        if(userName.length > 10) {
-            setUserNameErrText("ユーザーネームは10文字以内で入力してください")
-        } else {
             setUserName(e.target.value);
-            setUserNameErrText("")
-        }
     }
     const changeEmail : changeFormInput = (e) => {
         setEmail(e.target.value);
@@ -38,11 +34,15 @@ export const UserRegister : FC = () => {
         setConfirmPassword(e.target.value);
     }
     const userRegister : userRegister = (e) => {
-        if(userName === "" ) {
-            setUserNameErrText("ユーザー名を入力してください")
-        } else if(userName.length > 10) {
-            setUserNameErrText("ユーザー名は10文字以内で入力してください")
-        }
+        e.preventDefault();
+
+        setUserNameErrText(userNameValidation(userName));
+        setEmailErrText(emailValidation(email));
+        setPasswordErrText(passwordValidation(password));
+        setConfirmPasswordErrText(confirmPasswordValidation(password, confirmPassword));
+        if (userNameErrText || emailErrText || passwordErrText || confirmPasswordErrText) {
+                return
+            }
     }
 
     return (
@@ -53,12 +53,15 @@ export const UserRegister : FC = () => {
                 </Typography>
                 {userNameErrText ? <Alert color="red">{userNameErrText}</Alert> : ""}
                 <Input label="ユーザー名 (10文字以内)" size="lg" type="text" value={userName} onChange={changeUserName}/>
+                {emailErrText ? <Alert color="red">{emailErrText}</Alert> : ""}
                 <Input label="メールアドレス" size="lg" type="email" value={email} onChange={changeEmail}/>
-                <Input label="パスワード" size="lg" type="password" value={password} onChange={changePassword}/>
+                {passwordErrText ? <Alert color="red">{passwordErrText}</Alert> : ""}
+                <Input label="パスワード (4文字以上)" size="lg" type="password" value={password} onChange={changePassword}/>
+                {confirmPasswordErrText ? <Alert color="red">{confirmPasswordErrText}</Alert> : ""}
                 <Input label="確認用パスワード" size="lg" type="password" value={confirmPassword} onChange={changeConfirmPassword}/>
             </CardBody>
             <CardFooter className="pt-0">
-                <Button variant="gradient" fullWidth>
+                <Button variant="gradient" fullWidth onClick={userRegister}>
                     ユーザー登録
                 </Button>
             <Typography variant="small" className="mt-6 flex justify-center">
