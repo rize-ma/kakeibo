@@ -43,21 +43,22 @@ export const UserRegister : FC = () => {
         if (userNameErrText || emailErrText || passwordErrText || confirmPasswordErrText) {
                 return
             }
+        
     }
 
     return (
-        <Card className="w-96">
+        <Card className="w-96 mb-8">
             <CardBody className="flex flex-col gap-4">
                 <Typography variant="h3" className="flex justify-center">
                     ユーザー登録
                 </Typography>
-                {userNameErrText ? <Alert color="red">{userNameErrText}</Alert> : ""}
+                <Alert className="p-2" color="red" show={userNameErrText ? true : false}>{userNameErrText}</Alert>
                 <Input label="ユーザー名 (10文字以内)" size="lg" type="text" value={userName} onChange={changeUserName}/>
-                {emailErrText ? <Alert color="red">{emailErrText}</Alert> : ""}
+                <Alert className="p-2" color="red" show={emailErrText ? true : false}>{emailErrText}</Alert>
                 <Input label="メールアドレス" size="lg" type="email" value={email} onChange={changeEmail}/>
-                {passwordErrText ? <Alert color="red">{passwordErrText}</Alert> : ""}
+                <Alert className="p-2" color="red" show={passwordErrText ? true : false}>{passwordErrText}</Alert>
                 <Input label="パスワード (4文字以上)" size="lg" type="password" value={password} onChange={changePassword}/>
-                {confirmPasswordErrText ? <Alert color="red">{confirmPasswordErrText}</Alert> : ""}
+                <Alert className="p-2" color="red" show={confirmPasswordErrText ? true : false}>{confirmPasswordErrText}</Alert>
                 <Input label="確認用パスワード" size="lg" type="password" value={confirmPassword} onChange={changeConfirmPassword}/>
             </CardBody>
             <CardFooter className="pt-0">
