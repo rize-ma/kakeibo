@@ -8,21 +8,23 @@ import {
     Button,
     Alert,
     } from "@material-tailwind/react";
-import { changeFormInput, userRegister } from "../../types";
-import { confirmPasswordValidation, emailValidation, passwordValidation, userNameValidation } from "../../utils/validation";
+import { changeFormInput, userRegister, userRegisterErr, userRegisterResponse } from "../../types";
+import { confirmPasswordValidation, emailValidation, passwordValidation, usernameValidation } from "../../utils/validation";
+import authApi from "../../api/authApi";
+import { AxiosResponse } from "axios";
 
 export const UserRegister : FC = () => {
-    const [userName, setUserName] = useState<string>("");
+    const [username, setUsername] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [confirmPassword, setConfirmPassword] = useState<string>("");
-    const [userNameErrText, setUserNameErrText] = useState<string>("");
+    const [usernameErrText, setUsernameErrText] = useState<string>("");
     const [emailErrText, setEmailErrText] = useState<string>("");
     const [passwordErrText, setPasswordErrText] = useState<string>("");
     const [confirmPasswordErrText, setConfirmPasswordErrText] = useState<string>("");
 
     const changeUserName : changeFormInput = (e) => {
-            setUserName(e.target.value);
+            setUsername(e.target.value);
     }
     const changeEmail : changeFormInput = (e) => {
         setEmail(e.target.value);
@@ -33,18 +35,40 @@ export const UserRegister : FC = () => {
     const changeConfirmPassword : changeFormInput = (e) => {
         setConfirmPassword(e.target.value);
     }
-    const userRegister : userRegister = (e) => {
+    const userRegister : userRegister = async (e) => {
         e.preventDefault();
 
-        setUserNameErrText(userNameValidation(userName));
+        setUsernameErrText(usernameValidation(username));
         setEmailErrText(emailValidation(email));
         setPasswordErrText(passwordValidation(password));
         setConfirmPasswordErrText(confirmPasswordValidation(password, confirmPassword));
-        if (userNameErrText || emailErrText || passwordErrText || confirmPasswordErrText) {
+        if (usernameErrText || emailErrText || passwordErrText || confirmPasswordErrText) {
                 return
             }
         
-    }
+            try {
+                const res : AxiosResponse<userRegisterResponse>  = await authApi.register({
+                    username,
+                    email,
+                    password, 
+                    confirmPassword
+                });
+                localStorage.setItem("token", res.data.token);
+                // navigate("/")
+            } catch(err : any) {
+                console.log(err)
+                //errにはバックエンドで設定したエラーメッセージなどが格納されている
+                const errors = err.data.errors;
+                errors.forEach((err : userRegisterErr) => {
+                    if(err.param === "email"){
+                        setEmailErrText(err.msg)
+                    }
+                    if(err.param === "password"){
+                        setPasswordErrText(err.msg)
+                    }
+                });
+            }
+        }
 
     return (
         <Card className="w-96 mb-8">
@@ -52,12 +76,12 @@ export const UserRegister : FC = () => {
                 <Typography variant="h3" className="flex justify-center">
                     ユーザー登録
                 </Typography>
-                <Alert className="p-2" color="red" show={userNameErrText ? true : false}>{userNameErrText}</Alert>
-                <Input label="ユーザー名 (10文字以内)" size="lg" type="text" value={userName} onChange={changeUserName}/>
+                <Alert className="p-2" color="red" show={usernameErrText ? true : false}>{usernameErrText}</Alert>
+                <Input label="ユーザー名 (10文字以内)" size="lg" type="text" value={username} onChange={changeUserName}/>
                 <Alert className="p-2" color="red" show={emailErrText ? true : false}>{emailErrText}</Alert>
                 <Input label="メールアドレス" size="lg" type="email" value={email} onChange={changeEmail}/>
                 <Alert className="p-2" color="red" show={passwordErrText ? true : false}>{passwordErrText}</Alert>
-                <Input label="パスワード (4文字以上)" size="lg" type="password" value={password} onChange={changePassword}/>
+                <Input label="パスワード (8文字以上)" size="lg" type="password" value={password} onChange={changePassword}/>
                 <Alert className="p-2" color="red" show={confirmPasswordErrText ? true : false}>{confirmPasswordErrText}</Alert>
                 <Input label="確認用パスワード" size="lg" type="password" value={confirmPassword} onChange={changeConfirmPassword}/>
             </CardBody>
