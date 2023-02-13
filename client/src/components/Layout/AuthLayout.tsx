@@ -1,6 +1,7 @@
 import { FC, ReactNode } from "react"
 import { Box, Container } from '@mui/system'
 import { Typography } from "@material-tailwind/react"
+import { Outlet } from "react-router"
 
 type Props = {
     children: ReactNode
@@ -22,6 +23,7 @@ export const AuthLayout: FC<Props> = ({ children }) => {
         </Typography>
             {children}
         </Box>
+        <Outlet/>
     </Container>
     </div>
     )
