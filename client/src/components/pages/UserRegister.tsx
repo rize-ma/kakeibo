@@ -13,8 +13,10 @@ import { confirmPasswordValidation, emailValidation, passwordValidation, usernam
 import authApi from "../../api/authApi";
 import { AxiosResponse } from "axios";
 import { AuthLayout } from "../Layout/AuthLayout";
+import { Link, useNavigate } from "react-router-dom";
 
 export const UserRegister : FC = () => {
+    const navigate = useNavigate();
     const [username, setUsername] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
@@ -26,16 +28,16 @@ export const UserRegister : FC = () => {
 
     const changeUserName : changeFormInput = (e) => {
             setUsername(e.target.value);
-    }
+    };
     const changeEmail : changeFormInput = (e) => {
         setEmail(e.target.value);
-    }
+    };
     const changePassword : changeFormInput = (e) => {
         setPassword(e.target.value);
-    }
+    };
     const changeConfirmPassword : changeFormInput = (e) => {
         setConfirmPassword(e.target.value);
-    }
+    };
     const userRegister : userRegister = async (e) => {
         e.preventDefault();
 
@@ -55,17 +57,15 @@ export const UserRegister : FC = () => {
                     confirmPassword
                 });
                 localStorage.setItem("token", res.data.token);
-                // navigate("/")
+                navigate("/");
             } catch(err : any) {
-                console.log(err)
-                //errにはバックエンドで設定したエラーメッセージなどが格納されている
                 const errors = err.data.errors;
                 errors.forEach((err : userRegisterErr) => {
                     if(err.param === "email"){
-                        setEmailErrText(err.msg)
+                        setEmailErrText(err.msg);
                     }
                     if(err.param === "password"){
-                        setPasswordErrText(err.msg)
+                        setPasswordErrText(err.msg);
                     }
                 });
             }
@@ -95,13 +95,11 @@ export const UserRegister : FC = () => {
                     すでにアカウントを作成済ですか？
                 </Typography>
                 <Typography
-                    as="a"
-                    href="#signup"
                     variant="small"
                     color="blue"
                     className="mt-3 font-bold"
                 >
-                    ログイン
+                    <Link to="/login">ログイン</Link>
                 </Typography>
                 </CardFooter>
             </Card>

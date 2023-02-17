@@ -1,4 +1,4 @@
-import { FC, useState, } from "react";
+import { FC, MouseEvent, useState, } from "react";
 import {
     Card,
     CardBody,
@@ -8,64 +8,51 @@ import {
     Button,
     Alert,
     } from "@material-tailwind/react";
-import { changeFormInput, userRegister, userRegisterErr, userRegisterResponse } from "../../types";
-import { confirmPasswordValidation, emailValidation, passwordValidation, usernameValidation } from "../../utils/validation";
+import { changeFormInput, userLoginReaponse, userRegister, userRegisterErr, userRegisterResponse } from "../../types";
+import { emailValidation, passwordValidation } from "../../utils/validation";
 import authApi from "../../api/authApi";
 import { AxiosResponse } from "axios";
 import { AuthLayout } from "../Layout/AuthLayout";
+import { Link, useNavigate } from "react-router-dom";
 
 export const UserLogin : FC = () => {
-    const [username, setUsername] = useState<string>("");
+    const navigate = useNavigate();
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
-    const [confirmPassword, setConfirmPassword] = useState<string>("");
-    const [usernameErrText, setUsernameErrText] = useState<string>("");
     const [emailErrText, setEmailErrText] = useState<string>("");
     const [passwordErrText, setPasswordErrText] = useState<string>("");
-    const [confirmPasswordErrText, setConfirmPasswordErrText] = useState<string>("");
 
-    const changeUserName : changeFormInput = (e) => {
-            setUsername(e.target.value);
-    }
-    const changeEmail : changeFormInput = (e) => {
+    const changeEmail : changeFormInput = (e : React.ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value);
-    }
-    const changePassword : changeFormInput = (e) => {
+    };
+    const changePassword : changeFormInput = (e : React.ChangeEvent<HTMLInputElement>) => {
         setPassword(e.target.value);
-    }
-    const changeConfirmPassword : changeFormInput = (e) => {
-        setConfirmPassword(e.target.value);
-    }
-    const userRegister : userRegister = async (e) => {
+    };
+    const userRegister : userRegister = async (e : MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
-        setUsernameErrText(usernameValidation(username));
         setEmailErrText(emailValidation(email));
         setPasswordErrText(passwordValidation(password));
-        setConfirmPasswordErrText(confirmPasswordValidation(password, confirmPassword));
-        if (usernameErrText || emailErrText || passwordErrText || confirmPasswordErrText) {
+        if (emailErrText || passwordErrText ) {
                 return
             }
         
             try {
-                const res : AxiosResponse<userRegisterResponse>  = await authApi.register({
-                    username,
+                const res : AxiosResponse<userLoginReaponse>  = await authApi.login({
                     email,
-                    password, 
-                    confirmPassword
+                    password,
                 });
+                console.log(res);
                 localStorage.setItem("token", res.data.token);
-                // navigate("/")
+                navigate("/");
             } catch(err : any) {
-                console.log(err)
-                //errにはバックエンドで設定したエラーメッセージなどが格納されている
                 const errors = err.data.errors;
                 errors.forEach((err : userRegisterErr) => {
                     if(err.param === "email"){
-                        setEmailErrText(err.msg)
+                        setEmailErrText(err.msg);
                     }
                     if(err.param === "password"){
-                        setPasswordErrText(err.msg)
+                        setPasswordErrText(err.msg);
                     }
                 });
             }
@@ -91,13 +78,11 @@ export const UserLogin : FC = () => {
                     まだアカウントを作成していませんか？
                 </Typography>
                 <Typography
-                    as="a"
-                    href="#signup"
                     variant="small"
                     color="blue"
                     className="mt-3 font-bold"
                 >
-                    ユーザー登録
+                    <Link to="/register">ユーザー登録</Link>
                 </Typography>
                 </CardFooter>
             </Card>

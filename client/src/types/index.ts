@@ -6,7 +6,13 @@ export type userRegisterParams = {
     email : string,
     password : string,
     confirmPassword : string
-}
+};
+
+export type userLoginParams = {
+    email : string,
+    password : string
+};
+
 export type userRegisterResponse = {
     token : string,
     user : {
@@ -16,10 +22,13 @@ export type userRegisterResponse = {
         __v : number,
         _id : string
     }
-}
+};
+
+export type userLoginReaponse = userRegisterResponse;
+
 export type userRegisterErr = {
     value : string,
     msg : string,
     param : string,
     location : string
-}
+};
