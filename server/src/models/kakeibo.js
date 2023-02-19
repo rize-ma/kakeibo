@@ -18,16 +18,14 @@ const kakeiboSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    money: {
-        type: Number,
-        required: true
-    },
     expenses: {
-        type: Boolean,
-        required: true
+        type: Number,
+        default: 0
     },
     income: {
-        type: Boolean,
-        required: true
+        type: Number,
+        default: 0
     }
 })
+
+module.exports = mongoose.model("Kakeibo", kakeiboSchema);
