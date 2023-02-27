@@ -18,13 +18,17 @@ const kakeiboSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    expenses: {
+    money: {
         type: Number,
-        default: 0
+        required: true
+    },
+    expenses: {
+        type: Boolean,
+        default: true
     },
     income: {
-        type: Number,
-        default: 0
+        type: Boolean,
+        default: false
     }
 })
 

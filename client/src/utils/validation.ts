@@ -1,4 +1,4 @@
-import { authValidation } from "../types"
+import { authValidation, moneyValidationType } from "../types"
 
 
 export const usernameValidation: authValidation = (username) => {
@@ -54,4 +54,20 @@ export const confirmPasswordValidation : authValidation = (password, confirmPass
     }
 
     return errText
+}
+
+export const moneyValidation : moneyValidationType = (money) => {
+    let errText = "";
+    
+    if(!money) {
+        errText = "金額を入力してください";
+        console.log(money)
+        return errText;
+    };
+    const reg = new RegExp(/^[0-9]*$/);
+    if(!reg.test(money)) {
+        errText = "数値を入力してくだいさい";
+        return errText;
+    }
+    return errText;
 }

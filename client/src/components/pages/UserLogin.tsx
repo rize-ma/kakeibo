@@ -42,7 +42,6 @@ export const UserLogin : FC = () => {
                     email,
                     password,
                 });
-                console.log(res);
                 localStorage.setItem("token", res.data.token);
                 navigate("/");
             } catch(err : any) {
@@ -59,7 +58,6 @@ export const UserLogin : FC = () => {
         }
 
     return (
-        <AuthLayout>
             <Card className="w-96 mb-8 ">
                 <CardBody className="flex flex-col items-center gap-4">
                     <Typography variant="h3">
@@ -86,7 +84,6 @@ export const UserLogin : FC = () => {
                 </Typography>
                 </CardFooter>
             </Card>
-        </AuthLayout>
     )
 }
 

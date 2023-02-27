@@ -1,30 +1,15 @@
-import { FC, ReactNode } from "react"
-import { Box, Container } from '@mui/system'
+import { FC } from "react"
 import { Typography } from "@material-tailwind/react"
 import { Outlet } from "react-router"
 
-type Props = {
-    children: ReactNode
-}
 
-export const AuthLayout: FC<Props> = ({ children }) => {
+export const AuthLayout: FC = () => {
     return (
-        <div>
-    <Container component="main" maxWidth="xs">
-        <Box 
-        sx={{
-            marginTop:6,
-            display:"flex",
-            alignItems: "center",
-            flexDirection:"column"
-        }}> 
-        <Typography variant="h2" className="mb-6">
-            家計簿アプリ
-        </Typography>
-            {children}
-        </Box>
-        <Outlet/>
-    </Container>
+        <div className="flex flex-col items-center mt-16">
+                    <Typography variant="h2" className="mb-6">
+                        家計簿アプリ
+                    </Typography>
+                    <Outlet/>
     </div>
     )
 }

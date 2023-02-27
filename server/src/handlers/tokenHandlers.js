@@ -21,11 +21,11 @@ exports.verifyToken = async (req, res, next) => {
     if (tokenDecoded) {
         const user = await User.findById(tokenDecoded.id);
         if (!user) {
-            return res.status(401).json("権限がありません");
+            return res.status(401).json({ data: "権限がありません" });
         }
         req.user = user;
         next();
     } else {
-        return res.status(401).json("権限がありません");
+        return res.status(401).json({ data: "権限がありません" });
     }
 };

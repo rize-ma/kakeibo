@@ -39,7 +39,7 @@ exports.login = async (req, res) => {
         });
 
         return res.status(201).json({ data: { user, token } });
-    } catch (error) {
-        return res.status(500).json(error);
+    } catch (err) {
+        return res.status(500).json({ data: err });
     }
 }
