@@ -4,3 +4,4 @@ const tokenHandler = require("../handlers/tokenHandlers");
 
 router.post("/create", tokenHandler.verifyToken, kakeiboController.create);
 
+module.exports = router;

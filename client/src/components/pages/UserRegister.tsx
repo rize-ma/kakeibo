@@ -72,7 +72,6 @@ export const UserRegister : FC = () => {
         }
 
     return (
-        <AuthLayout>
             <Card className="w-96 mb-8">
                 <CardBody className="flex flex-col items-center gap-4">
                     <Typography variant="h3">
@@ -103,7 +102,6 @@ export const UserRegister : FC = () => {
                 </Typography>
                 </CardFooter>
             </Card>
-        </AuthLayout>
     )
 }
 

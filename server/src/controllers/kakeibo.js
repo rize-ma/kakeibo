@@ -1,18 +1,19 @@
 const Kakeibo = require("../models/kakeibo");
 
 exports.create = async (req, res) => {
-    const { user, category, description, expenses, income } = req;
+    const { category, description, money, expenses, income } = req.body;
     try {
         const kakeibo = await Kakeibo.create({
-            user: user._id,
+            user: req.user._id,
             category,
             description,
+            money,
             expenses,
             income
         });
         res.status(201).json({ data: { kakeibo } });
     } catch (err) {
-        res.status(500).json(err);
+        res.status(500).json({ data: err });
     }
 }
 
