@@ -61,7 +61,6 @@ export const moneyValidation : moneyValidationType = (money) => {
     
     if(!money) {
         errText = "金額を入力してください";
-        console.log(money)
         return errText;
     };
     const reg = new RegExp(/^[0-9]*$/);

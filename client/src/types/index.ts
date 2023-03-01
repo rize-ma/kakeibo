@@ -2,6 +2,10 @@ export type changeFormInput = ( e: React.ChangeEvent<HTMLInputElement>) => void;
 export type userRegister = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 export type authValidation = (character: string, confirmPassword?: string) => string;
 export type moneyValidationType = (money : string) => string;
+export type toggleCategoryData = () => string[];
+export type changeInputType = (value :string) => void;
+export type voidFunction = () => void;
+export type isExpenses = () => boolean;
 
 export type userRegisterParams = {
     username: string,
@@ -51,3 +55,14 @@ export type userData = {
     __v: number,
     _id: string
 }
+
+export type inputType = [
+    {
+        label: "支出",
+        value: "expenses"
+    },
+    {
+        label: "収入",
+        value: "income"
+    }
+]
