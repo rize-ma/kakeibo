@@ -1,9 +1,11 @@
 export type changeFormInput = ( e: React.ChangeEvent<HTMLInputElement>) => void;
 export type userRegister = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 export type authValidation = (character: string, confirmPassword?: string) => string;
-export type moneyValidationType = (money : string) => string;
+export type moneyValidationType = (money: string) => string;
 export type toggleCategoryData = () => string[];
-export type changeInputType = (value :string) => void;
+export type changeInputType = (value: string) => void;
+export type changeDate = (date: Date) => void;
+export type formatDateType = (date: string) => string
 export type voidFunction = () => void;
 export type isExpenses = () => boolean;
 
@@ -22,7 +24,7 @@ export type userLoginParams = {
 export type kakeiboCreateParams = {
     category: string | null,
     description: string | null,
-    //date:
+    date: string,
     money: number,
     expenses?: boolean,
     income?: boolean,

@@ -1,18 +1,25 @@
-import { Alert, Card, CardBody, Input, Textarea, Typography } from "@material-tailwind/react";
+import { Alert, Card, CardBody, Dialog, DialogBody, DialogHeader, Input, Textarea, Typography } from "@material-tailwind/react";
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import { SegmentedControl, Select } from "@mantine/core";
 import { ChangeEventHandler, useState } from "react";
-import { changeFormInput, changeInputType, inputType, isExpenses, toggleCategoryData, voidFunction } from "../../../types";
+import { changeDate, changeFormInput, changeInputType, inputType, isExpenses, toggleCategoryData, voidFunction } from "../../../types";
 import { Button } from "@material-tailwind/react";
 import { moneyValidation } from "../../../utils/validation";
 import kakeiboApi from "../../../api/kakeiboApi";
+import { DatePicker } from "@mantine/dates";
+import "dayjs/locale/ja"
+import { formatDate, getNowDate } from "../../../utils/date";
+
 
 const Kakeibo = () => {
+  getNowDate()
   const [inputType, setInputType] = useState<string>("expenses");
   const [money, setMoney] = useState<string>("");
   const [moneyErrText, setMoneyErrText] = useState<string>("")
   const [category, setCategory] = useState<string | null>("食費");
   const [toggleLabel, setToggleLabel] = useState<boolean>(false);
+  const [dialog, setDialog] = useState<boolean>(false);
+  const [date, setDate] = useState<string>(getNowDate());
   const [description, setDescription] = useState<string>("");
   const [serverErrText, setServerErrText] = useState<string>("");
   const [successText, setSuccessText] = useState<string>("");
@@ -29,6 +36,11 @@ const Kakeibo = () => {
       return INCOME_DATA;
     }
     return [""];
+  };
+
+  const categoryInitialValue: voidFunction = () => {
+    if(inputType === "expenses") setCategory("食費");
+    if(inputType === "income") setCategory("給料");
   };
 
   const changeInputType: changeInputType = (value:string) => {
@@ -57,6 +69,17 @@ const Kakeibo = () => {
     setServerErrText("");
     setSuccessText("");
   };
+
+  const toggleDialog: voidFunction = () => {
+    setDialog(!dialog);
+  };
+
+  const changeDate: changeDate = (date) => {
+    const formatedDate = formatDate(date.toLocaleDateString());
+    setDate(formatedDate);
+    setDialog(false);
+  }
+  
   
   const createKakeibo: voidFunction = async () => {
     const moneyValidationRes = moneyValidation(money);
@@ -67,8 +90,8 @@ const Kakeibo = () => {
     const newMoney = Number(money);
     
     try {
-      await kakeiboApi.create({category,description, money: newMoney, expenses:isExpenses(), income: !isExpenses()});
-      setCategory("食費");
+      await kakeiboApi.create({category,description, date, money: newMoney, expenses:isExpenses(), income: !isExpenses()});
+      categoryInitialValue();
       setMoney("");
       setDescription("");
       setSuccessText("登録が完了しました");
@@ -134,7 +157,22 @@ const Kakeibo = () => {
                     styles={{ label: { color: toggleLabel ? "orange" : "black" } }}
                     >
                     </Select>
-                    <Textarea label="メモ" color="orange" onChange={changeDescription}/>
+                    <Input label="日付" size="lg" color="orange" onClick={toggleDialog} value={date} />
+                    <Dialog open={dialog} handler={setDialog} size="xs" className="flex flex-col items-center justify-center p-5 min-w-fit">
+                      <div className="my-5">
+                      <DialogHeader>日付を選択してください</DialogHeader>
+                      <DialogBody>
+                        <DatePicker 
+                        locale="ja"
+                        onChange={changeDate}
+                        firstDayOfWeek={0}
+                        className="w-full"
+                        />
+                      </DialogBody>
+                      </div>
+                      </Dialog>
+                    
+                    <Textarea label="メモ" color="orange" onChange={changeDescription} value={description}/>
                     <Button color="orange" onClick={createKakeibo}>保存</Button>
                 </CardBody>
             </Card>

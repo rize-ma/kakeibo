@@ -14,9 +14,9 @@ const kakeiboSchema = new mongoose.Schema({
         type: String,
         default: ""
     },
-    Date: {
-        type: Date,
-        default: Date.now
+    date: {
+        type: String,
+        required: true
     },
     money: {
         type: Number,
