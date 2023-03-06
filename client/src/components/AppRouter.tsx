@@ -1,10 +1,9 @@
-import { FC, useEffect } from "react"
-import { Outlet, useNavigate } from "react-router-dom"
+import { FC, useEffect } from "react";
+import { useNavigate, Outlet } from "react-router-dom";
+import useUserStore from "../store";
+import authUtils from "../utils/authUtils";
 
-import useUserStore from "../../store"
-import authUtils from "../../utils/authUtils"
-
-export const AppLayout : FC = () => {
+const AppRouter: FC = () => {
     const navigate = useNavigate();
     const setUser = useUserStore((state) => state.setUser);
 
@@ -15,15 +14,16 @@ export const AppLayout : FC = () => {
                 navigate("/auth/login");
             } else {
                 setUser(user);
-                navigate("create");
+                navigate("/kakeibo/create");
             }
         };
         checkAuth();
     }, []);
     return (
-        <div className="flex flex-col items-center mt-16">
+        <div>
             <Outlet/>
         </div>
     )
 }
 
+export default AppRouter

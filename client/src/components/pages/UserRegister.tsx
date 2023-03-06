@@ -57,7 +57,7 @@ export const UserRegister : FC = () => {
                     confirmPassword
                 });
                 localStorage.setItem("token", res.data.token);
-                navigate("/");
+                navigate("/kakeibo/create");
             } catch(err : any) {
                 const errors = err.data.errors;
                 errors.forEach((err : userRegisterErr) => {
@@ -98,7 +98,7 @@ export const UserRegister : FC = () => {
                     color="blue"
                     className="mt-3 font-bold"
                 >
-                    <Link to="/login">ログイン</Link>
+                    <Link to="/auth/login">ログイン</Link>
                 </Typography>
                 </CardFooter>
             </Card>

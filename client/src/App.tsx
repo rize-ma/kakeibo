@@ -6,6 +6,7 @@ import { UserLogin } from "./components/pages/UserLogin";
 import Kakeibo from "./components/pages/kakeibo/create";
 import { AppLayout } from "./components/Layout/AppLayout";
 import { MantineProvider } from "@mantine/core";
+import AppRouter from "./components/AppRouter";
 
 const App : FC = () => {
   
@@ -23,12 +24,14 @@ const App : FC = () => {
       >
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<AuthLayout/>}>
-              <Route path="register" element={<UserRegister/>}/>
-              <Route path="login" element={<UserLogin/>}/>
-            </Route>
-            <Route path="/" element={<AppLayout/>}>
-              <Route path="create" element={<Kakeibo/>}/>
+            <Route path="/" element={<AppRouter/>}>
+              <Route path="auth" element={<AuthLayout/>}>
+                <Route path="register" element={<UserRegister/>}/>
+                <Route path="login" element={<UserLogin/>}/>
+              </Route>
+              <Route path="kakeibo" element={<AppLayout/>}>
+                <Route path="create" element={<Kakeibo/>}/>
+              </Route>
             </Route>
           </Routes>
         </BrowserRouter>
