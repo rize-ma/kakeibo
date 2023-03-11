@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { Alert, Card, CardBody, Dialog, DialogBody, DialogHeader, Input, Textarea, Typography } from "@material-tailwind/react";
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import { SegmentedControl, Select } from "@mantine/core";
@@ -11,7 +12,7 @@ import "dayjs/locale/ja"
 import { formatDate, getNowDate } from "../../../utils/date";
 
 
-const Kakeibo = () => {
+export const Create: FC = () => {
   getNowDate()
   const [inputType, setInputType] = useState<string>("expenses");
   const [money, setMoney] = useState<string>("");
@@ -180,4 +181,3 @@ const Kakeibo = () => {
   )
 }
 
-export default Kakeibo

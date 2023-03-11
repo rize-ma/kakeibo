@@ -56,7 +56,7 @@ export type userData = {
     username: string,
     __v: number,
     _id: string
-}
+};
 
 export type inputType = [
     {
@@ -67,4 +67,16 @@ export type inputType = [
         label: "収入",
         value: "income"
     }
-]
+];
+
+export type kakeibo = {
+    category: string,
+    date: string,
+    description: string,
+    expenses: boolean,
+    income: boolean,
+    money: number,
+    user: string,
+    __v: number,
+    _id: number
+};
