@@ -3,7 +3,7 @@ import { useNavigate, Outlet } from "react-router-dom";
 import useUserStore from "../store";
 import authUtils from "../utils/authUtils";
 
-const AppRouter: FC = () => {
+export const AppRouter: FC = () => {
     const navigate = useNavigate();
     const setUser = useUserStore((state) => state.setUser);
 
@@ -26,4 +26,3 @@ const AppRouter: FC = () => {
     )
 }
 
-export default AppRouter

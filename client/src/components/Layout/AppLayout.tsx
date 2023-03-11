@@ -15,7 +15,6 @@ export const AppLayout : FC = () => {
                 navigate("/auth/login");
             } else {
                 setUser(user);
-                navigate("create");
             }
         };
         checkAuth();

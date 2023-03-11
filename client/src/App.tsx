@@ -3,10 +3,11 @@ import { AuthLayout } from "./components/Layout/AuthLayout";
 import { UserRegister } from "./components/pages/UserRegister";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { UserLogin } from "./components/pages/UserLogin";
-import Kakeibo from "./components/pages/kakeibo/create";
+import {Create} from "./components/pages/kakeibo/Create";
 import { AppLayout } from "./components/Layout/AppLayout";
 import { MantineProvider } from "@mantine/core";
-import AppRouter from "./components/AppRouter";
+import {AppRouter} from "./components/AppRouter";
+import { DateSearch } from "./components/pages/kakeibo/DateSearch";
 
 const App : FC = () => {
   
@@ -24,14 +25,14 @@ const App : FC = () => {
       >
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<AppRouter/>}>
-              <Route path="auth" element={<AuthLayout/>}>
-                <Route path="register" element={<UserRegister/>}/>
-                <Route path="login" element={<UserLogin/>}/>
-              </Route>
-              <Route path="kakeibo" element={<AppLayout/>}>
-                <Route path="create" element={<Kakeibo/>}/>
-              </Route>
+            <Route path="/" element={<AppRouter/>}/>
+            <Route path="auth" element={<AuthLayout/>}>
+              <Route path="register" element={<UserRegister/>}/>
+              <Route path="login" element={<UserLogin/>}/>
+            </Route>
+            <Route path="kakeibo" element={<AppLayout/>}>
+              <Route path="create" element={<Create/>}/>
+              <Route path="calender" element={<DateSearch/>}/>
             </Route>
           </Routes>
         </BrowserRouter>
