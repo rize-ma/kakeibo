@@ -1,9 +1,11 @@
-import { FC } from "react";
 
-export const kakeiboDetails: FC = () => {
+import { FC } from "react";
+import { useLocation } from "react-router-dom";
+
+export const KakeiboDetails: FC = () => {
+    let { state } = useLocation();
+    console.log(state)
     return (
-        <div>
-        
-        </div>
+        <div></div>
     )
 }

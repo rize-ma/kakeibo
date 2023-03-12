@@ -36,6 +36,12 @@ export const DateSearch: FC = () => {
         setTotalMoney(totalMoney);
     },[kakeiboData]);
 
+    const isExpenses = (expenses: boolean) => {
+        if(expenses === true) return "支出";
+        if(expenses === false) return "収入";
+        return "";
+    }
+
     const changeDate: changeDate = async (date) => {
         const formatedDate = formatDate(date.toLocaleDateString());
         setSearchDate(formatedDate);
@@ -73,9 +79,15 @@ export const DateSearch: FC = () => {
                     <Table striped>
                         <thead>
                             <tr>
-                                <th>支出/収入</th>
-                                <th>カテゴリー</th>
-                                <th>円</th>
+                                <th>
+                                    <p className="text-orange-400">支出/収入</p>
+                                </th>
+                                <th>
+                                    <p className="text-orange-400">カテゴリー</p> 
+                                </th>
+                                <th>
+                                    <p className="text-orange-400">円</p> 
+                                </th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -83,7 +95,7 @@ export const DateSearch: FC = () => {
                             {kakeiboData.map((kakeibo: kakeibo) => (
                                 <tr key={kakeibo._id}>
                                     <td>
-                                        <p>{kakeibo.expenses ? "支出" : "収入"}</p>
+                                        <p>{isExpenses(kakeibo.expenses)}</p>
                                     </td>
                                     <td>
                                         <p>{kakeibo.category}</p>
@@ -92,7 +104,9 @@ export const DateSearch: FC = () => {
                                         <p>{kakeibo.money}</p>
                                     </td>
                                     <td>
-                                        <Link to={kakeibo._id}></Link>
+                                        {kakeibo._id ? 
+                                        (<Link to={kakeibo._id} state={{ some: kakeibo._id }} style={{color: "blue"}}>詳細</Link>)
+                                        : ""}
                                     </td>
                                 </tr>
                             ))}
