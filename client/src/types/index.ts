@@ -78,5 +78,5 @@ export type kakeibo = {
     money: number,
     user: string,
     __v: number,
-    _id: number
+    _id: string
 };

@@ -5,6 +5,7 @@ import "dayjs/locale/ja";
 import { changeDate, kakeibo } from "../../../types";
 import { formatDate, getNowDate } from "../../../utils/date";
 import kakeiboApi from "../../../api/kakeiboApi";
+import { Link } from "react-router-dom";
 
 export const DateSearch: FC = () => {
     const [searchDate, setSearchDate] = useState<string>(getNowDate());
@@ -91,7 +92,7 @@ export const DateSearch: FC = () => {
                                         <p>{kakeibo.money}</p>
                                     </td>
                                     <td>
-                                        <p>詳細</p>
+                                        <Link to={kakeibo._id}></Link>
                                     </td>
                                 </tr>
                             ))}
