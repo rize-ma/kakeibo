@@ -103,7 +103,7 @@ export const Create: FC = () => {
   }
   return (
     <div>
-      <Card className="w-96 mb-8 ">
+      <Card className="w-96 mb-8">
                 <CardBody className="flex flex-col items-center gap-4">
                 <Alert 
                 color="teal" 
