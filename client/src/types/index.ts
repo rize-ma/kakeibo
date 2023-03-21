@@ -21,7 +21,7 @@ export type userLoginParams = {
     password: string
 };
 
-export type kakeiboCreateParams = {
+export type kakeiboParams = {
     category: string | null,
     description: string | null,
     date: string,
