@@ -3,6 +3,7 @@ import { Outlet, useNavigate } from "react-router-dom"
 
 import useUserStore from "../../store"
 import authUtils from "../../utils/authUtils"
+import { AppHeader } from "../AppHeader"
 
 export const AppLayout : FC = () => {
     const navigate = useNavigate();
@@ -20,8 +21,11 @@ export const AppLayout : FC = () => {
         checkAuth();
     }, []);
     return (
-        <div className="flex flex-col items-center mt-16">
-            <Outlet/>
+        <div>
+            <AppHeader/>
+            <div className="flex flex-col items-center mt-16">
+                <Outlet/>
+            </div>
         </div>
     )
 }
