@@ -9,6 +9,7 @@ import { MantineProvider } from "@mantine/core";
 import {AppRouter} from "./components/AppRouter";
 import { DateSearch } from "./components/pages/kakeibo/DateSearch";
 import { KakeiboDetails } from "./components/pages/kakeibo/kakeiboDetails";
+import { Graph } from "./components/pages/kakeibo/Graph";
 
 const App : FC = () => {
   
@@ -35,6 +36,7 @@ const App : FC = () => {
               <Route path="create" element={<Create/>}/>
               <Route path="calender" element={<DateSearch/>}/>
               <Route path="calender/:kakeiboId" element={<KakeiboDetails/>}/>
+              <Route path="graph" element={<Graph/>}/>
             </Route>
           </Routes>
         </BrowserRouter>

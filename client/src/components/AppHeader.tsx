@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Header, Group, Container } from '@mantine/core';
+import { Header } from '@mantine/core';
 import { Link } from "react-router-dom";
 
 export const AppHeader: FC = () => {
@@ -11,6 +11,9 @@ export const AppHeader: FC = () => {
                 </div>
                 <div className="mx-7">
                     <Link to="/kakeibo/calender" className="text-lg font-semibold text-white">カレンダー</Link>
+                </div>
+                <div className="mx-7">
+                    <Link to="/kakeibo/graph" className="text-lg font-semibold text-white">グラフ</Link>
                 </div>
             </div>
         </Header>
