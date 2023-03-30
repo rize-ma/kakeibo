@@ -4,10 +4,16 @@ export type authValidation = (character: string, confirmPassword?: string) => st
 export type moneyValidationType = (money: string) => string;
 export type toggleCategoryData = () => string[];
 export type changeInputType = (value: string) => void;
+export type changeCategoryType = changeInputType;
 export type changeDate = (date: Date) => void;
-export type formatDateType = (date: string) => string
+export type formatDateType = (date: string) => string;
+export type getNowDateType = () => string;
+export type getYearType = () => number;
+export type getMonthType = getYearType;
 export type voidFunction = () => void;
 export type isExpenses = () => boolean;
+export type getMonthData = (nowYear: number, nowMonth:number) => void;
+export type formatedYearMonth = (nowYear: number, nowMonth:number) => string;
 
 export type userRegisterParams = {
     username: string,
@@ -69,6 +75,8 @@ export type inputType = [
     }
 ];
 
+export type categoryTypeData = inputType;
+
 export type kakeibo = {
     category: string,
     date: string,
@@ -80,3 +88,5 @@ export type kakeibo = {
     __v: number,
     _id: string
 };
+
+export type graphDataType = {name: string, value: number};

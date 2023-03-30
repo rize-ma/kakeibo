@@ -13,7 +13,6 @@ import { formatDate, getNowDate } from "../../../utils/date";
 
 
 export const Create: FC = () => {
-  getNowDate()
   const [inputType, setInputType] = useState<string>("expenses");
   const [money, setMoney] = useState<string>("");
   const [moneyErrText, setMoneyErrText] = useState<string>("")
