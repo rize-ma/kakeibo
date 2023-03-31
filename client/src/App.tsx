@@ -7,7 +7,7 @@ import {Create} from "./components/pages/kakeibo/Create";
 import { AppLayout } from "./components/Layout/AppLayout";
 import { MantineProvider } from "@mantine/core";
 import {AppRouter} from "./components/AppRouter";
-import { DateSearch } from "./components/pages/kakeibo/DateSearch";
+import { Calender } from "./components/pages/kakeibo/Calender";
 import { KakeiboDetails } from "./components/pages/kakeibo/kakeiboDetails";
 import { Graph } from "./components/pages/kakeibo/Graph";
 
@@ -34,7 +34,7 @@ const App : FC = () => {
             </Route>
             <Route path="kakeibo" element={<AppLayout/>}>
               <Route path="create" element={<Create/>}/>
-              <Route path="calender" element={<DateSearch/>}/>
+              <Route path="calender" element={<Calender/>}/>
               <Route path="calender/:kakeiboId" element={<KakeiboDetails/>}/>
               <Route path="graph" element={<Graph/>}/>
             </Route>
