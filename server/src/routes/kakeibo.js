@@ -7,5 +7,6 @@ router.get("/calender/:kakeiboDate", tokenHandler.verifyToken, kakeiboController
 router.get("/details/:kakeiboId", tokenHandler.verifyToken, kakeiboController.getOne);
 router.put("/details/:kakeiboId", tokenHandler.verifyToken, kakeiboController.update);
 router.get("/graph/:yearMonth", tokenHandler.verifyToken, kakeiboController.getMonth);
+router.delete("/details/:kakeiboId", tokenHandler.verifyToken, kakeiboController.delete);
 
 module.exports = router;

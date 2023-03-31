@@ -7,7 +7,7 @@ import { formatDate, getNowDate } from "../../../utils/date";
 import kakeiboApi from "../../../api/kakeiboApi";
 import { Link } from "react-router-dom";
 
-export const DateSearch: FC = () => {
+export const Calender: FC = () => {
     const [searchDate, setSearchDate] = useState<string>(getNowDate());
     const [kakeiboData, setKakeiboData] = useState<Array<object> | any>([""]);
     const [expensesMoney, setExpensesMoney] = useState<number>(0);

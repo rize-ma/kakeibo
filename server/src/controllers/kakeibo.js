@@ -65,9 +65,21 @@ exports.getMonth = async (req, res) => {
 
     try {
         const kakeiboData = await kakeibo.find({ user: req.user.id, date: reg });
-        res.status(200).json({ data: kakeiboData })
+        res.status(200).json({ data: kakeiboData });
     } catch (err) {
         res.status(500).json({ data: err });
     }
 };
+
+exports.delete = async (req, res) => {
+    const { kakeiboId } = req.params;
+    try {
+        const kakeiboData = await kakeibo.findOne({ user: req.user.id, _id: kakeiboId });
+        if (!kakeiboData) return res.status(404).json({ data: "家計簿が存在しません" });
+        await kakeibo.deleteOne({ user: req.user.id, _id: kakeiboId });
+        res.status(200).json({ data: "家計簿を削除しました" });
+    } catch (err) {
+        res.status(500).json({ data: err });
+    }
+}
 

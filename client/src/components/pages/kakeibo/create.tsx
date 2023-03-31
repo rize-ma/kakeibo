@@ -15,7 +15,7 @@ import { formatDate, getNowDate } from "../../../utils/date";
 export const Create: FC = () => {
   const [inputType, setInputType] = useState<string>("expenses");
   const [money, setMoney] = useState<string>("");
-  const [moneyErrText, setMoneyErrText] = useState<string>("")
+  const [moneyErrText, setMoneyErrText] = useState<string>("");
   const [category, setCategory] = useState<string | null>("食費");
   const [toggleLabel, setToggleLabel] = useState<boolean>(false);
   const [dialog, setDialog] = useState<boolean>(false);

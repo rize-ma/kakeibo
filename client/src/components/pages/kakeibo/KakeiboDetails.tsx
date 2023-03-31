@@ -10,6 +10,7 @@ import { DatePicker } from "@mantine/dates";
 import "dayjs/locale/ja";
 import { formatDate, getNowDate } from "../../../utils/date";
 import { useLocation, useNavigate } from "react-router-dom";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export const KakeiboDetails: FC = () => {
     const [inputType, setInputType] = useState<string>("expenses");
@@ -128,11 +129,20 @@ export const KakeiboDetails: FC = () => {
         setTimeout(resetReaponseText,5000);
         } catch {
         setServerErrText("サーバーでエラーが発生しました。");
+        };
+    };
+
+    const deleteKakeibo = async () => {
+        try{
+            await kakeiboApi.delete(kakeiboId);
+            restorePage();
+        } catch {
+            setServerErrText("サーバーでエラーが発生しました")
         }
     }
     return (
         <div>
-            <Card className="w-96 mb-8">
+            <Card className="w-96 mb-8 relative mx-5">
                 <CardBody className="flex flex-col items-center gap-4">
                     <Alert 
                     color="teal" 
@@ -163,6 +173,9 @@ export const KakeiboDetails: FC = () => {
                     <Typography variant="h3">
                         詳細
                     </Typography>
+                    <div className="absolute top-1.5 right-1.5 cursor-pointer" onClick={deleteKakeibo}>
+                        <DeleteIcon/>
+                    </div>
                     <SegmentedControl
                     data = {INPUT_TYPE_DATA}
                     value={inputType}
