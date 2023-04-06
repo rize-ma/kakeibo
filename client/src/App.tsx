@@ -3,12 +3,12 @@ import { AuthLayout } from "./components/Layout/AuthLayout";
 import { UserRegister } from "./components/pages/UserRegister";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { UserLogin } from "./components/pages/UserLogin";
-import {Create} from "./components/pages/kakeibo/Create";
+import {Create} from "./components/pages/kakeibo/create";
 import { AppLayout } from "./components/Layout/AppLayout";
 import { MantineProvider } from "@mantine/core";
 import {AppRouter} from "./components/AppRouter";
 import { Calender } from "./components/pages/kakeibo/Calender";
-import { KakeiboDetails } from "./components/pages/kakeibo/kakeiboDetails";
+import { KakeiboDetails } from "./components/pages/kakeibo/KakeiboDetails";
 import { Graph } from "./components/pages/kakeibo/Graph";
 
 const App : FC = () => {
