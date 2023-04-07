@@ -6,19 +6,20 @@ const User = require("../models/user");
 const { registerUser } = require("../controllers/register");
 const { login } = require("../controllers/login");
 const tokenHandler = require("../handlers/tokenHandlers");
+let isUsedEmail = true
 
 router.post(
     "/register",
     body("password")
         .isLength({ min: 8 })
         .withMessage("パスワードは8文字以上である必要があります"),
-    body("email").custom((value) => {
-        User.findOne({ email: value }).then((email) => {
+    body("email").custom(async (value) => {
+        await User.findOne({ email: value }).then((email) => {
             if (email) {
-                return Promise.reject("");
+                return Promise.reject("このメールアドレスは使用されています");
             }
         });
-    }).withMessage("このメールアドレスはすでに使用されています"),
+    }),
     registerUser
 );
 
