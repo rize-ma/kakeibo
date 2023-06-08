@@ -17,7 +17,7 @@
   - axios
   - zustand
   - react-router-dom
-  ##### フロントエンド
+  ##### バックエンド
   - node.js
   - cors
   - crypto-js
@@ -25,5 +25,7 @@
   - express-validator
   - mongoose
   - nodemon
+  ##### DB
+  - mondodb
  ### 作成した経緯
  
