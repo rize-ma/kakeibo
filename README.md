@@ -26,6 +26,6 @@
   - mongoose
   - nodemon
   ##### DB
-  - mondodb
+  - mongodb
  ### 作成した経緯
- 
+ UdemyにてMERNスタックの講座を受講したためそのアウトプット学習のため
