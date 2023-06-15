@@ -52,6 +52,9 @@ export const Calender: FC = () => {
 
     return (
         <div className="w-full flex flex-col items-center">
+            <div className="text-lg font-medium">
+                登録した日付を選択してください
+            </div>
             <div className="my-2">
                 <DatePicker 
                     locale="ja"
