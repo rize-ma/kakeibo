@@ -12,7 +12,7 @@
   - React
   - typescript
   - mantineUI
-  - mateialUI
+  - materialUI
   - tailwindcss
   - axios
   - zustand
