@@ -19,7 +19,6 @@
   - react-router-dom
   ##### バックエンド
   - node.js
-  - cors
   - crypto-js
   - express
   - express-validator
